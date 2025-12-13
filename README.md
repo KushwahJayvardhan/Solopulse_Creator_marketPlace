@@ -30,7 +30,7 @@ Spring Data JPA
 
 Hibernate
 
-Spring Security (optional based on your setup)
+Spring Security
 
 PostgreSQL
 
@@ -42,5 +42,5 @@ Git and GitHub
 
 Maven
 
-Postman / Swagger for API testing
+Postman
 
