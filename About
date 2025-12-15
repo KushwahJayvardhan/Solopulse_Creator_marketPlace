@@ -18,28 +18,6 @@ PostgreSQL integration with clear schema structure
 
 Extensible design for future modules including messaging, payments, and analytics
 
-Tech Stack
-
-Backend
-
-Java
-
-Spring Boot
-
-Spring Data JPA
-
-Hibernate
-
-Spring Security
-
-PostgreSQL
-
-Tools
-
-IntelliJ IDEA
-
-Git and GitHub
-
 Maven
 
 Postman
