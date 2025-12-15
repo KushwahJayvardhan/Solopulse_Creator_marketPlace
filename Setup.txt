@@ -1,0 +1,14 @@
+Setup Steps
+
+1.Clone the repository
+git clone https://github.com/your-username/solopulse_creator_marketplace.git
+
+2.Configure database settings in application.properties
+
+3.Build and run the project
+mvn clean install
+mvn spring-boot:run
+
+4.Access the application locally
+
+
