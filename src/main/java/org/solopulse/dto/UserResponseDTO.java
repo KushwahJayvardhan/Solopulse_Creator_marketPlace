@@ -1,44 +1,30 @@
-package org.solopulse.dao;
+package org.solopulse.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.solopulse.enums.Roles;
 
 import java.time.LocalDateTime;
 
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class UserDTO {
+public class UserResponseDTO {
 
     private Integer id;
-
     private String name;
-
     private String email;
 
     private Roles userRole;
-
     private String imageUrl;
-
     private String bio;
-
     private LocalDateTime createdAt;
-
     private LocalDateTime updatedAt;
 
-    // Related profile references (IDs only)
     private Integer creatorProfileId;
-
     private Integer brandProfileId;
-
     private Integer marketerProfileId;
-
     private Integer profileId;
-
     private Integer proposalId;
 }
-
