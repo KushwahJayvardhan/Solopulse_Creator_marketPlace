@@ -1,6 +1,7 @@
 package org.solopulse.service;
 
-import org.solopulse.Exception.ResourceNotFoundException;
+import org.solopulse.exception.IdNotFoundException;
+import org.solopulse.exception.ResourceNotFoundException;
 import org.solopulse.dao.UserDao;
 import org.solopulse.dto.UserCreateDto;
 import org.solopulse.dto.UserResponseDTO;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -112,5 +114,58 @@ public class UserService {
                 .map(userMapper::toResponseDto)
                 .collect(Collectors.toList());
     }
+
+    public ResponseEntity<String> updateUserImage(Integer userId, String imgUrl){
+        Optional<User> user = userDao.findUserById(userId);
+        if(user.isEmpty()){
+            throw new IdNotFoundException("user not found with id " + userId);
+        }
+        if(imgUrl==null || imgUrl.trim().isEmpty()){
+            ResponseEntity.badRequest().body("image url can not be empty");
+        }
+//
+//        User existingUser =  user.get();
+//        existingUser.setImageUrl(imgUrl);
+//        userDao.createUser(existingUser);
+
+        int res = userDao.updateUserImage(userId, imgUrl);
+        if(res==1){
+          return  ResponseEntity.ok("user image updated with user id " + userId);
+        }
+        else return new ResponseEntity<>(String.valueOf("can not update image for the user " + userId), HttpStatus.NOT_MODIFIED);
+    }
+
+    public ResponseEntity<String> updateUserRole(Integer id, Roles role){
+        Optional<User> user = userDao.findUserById(id);
+        if(user.isEmpty()){
+            throw new IdNotFoundException("user not found with given id " + id);
+        }
+
+        if(role == null){
+            String validRoles = Arrays.stream(Roles.values())
+                    .map(Enum::name)
+                    .collect(Collectors.joining(", "));
+            throw new IllegalArgumentException("Role cannot be null. Valid roles are: " + validRoles);
+        }
+        userDao.updateUserRole(id, role);
+        return  ResponseEntity.ok("user role updated");
+    }
+
+    public ResponseEntity<String> updateUserBio(Integer id, String updatedBio){
+        User user = userDao.findUserById(id)
+                            .orElseThrow(()-> new IdNotFoundException("user not found with given id:" + id));
+
+        userDao.updateUserBio(id,updatedBio);
+        return  ResponseEntity.ok("user bio updated");
+    }
+
+    public ResponseEntity<String> updateUserPassword(Integer id, String newPassword){
+        User user = userDao.findUserById(id)
+                .orElseThrow(()-> new IdNotFoundException("user not found with given id:" + id));
+
+        userDao.updateUserPassword(id,newPassword);
+        return ResponseEntity.ok("user password updated successfully with user id:" + id);
+    }
+
 
 }

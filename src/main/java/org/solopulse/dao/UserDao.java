@@ -136,15 +136,15 @@ public class UserDao {
         return userRepo.updateUserImage(userId, imageUrl);
     }
 
-    public int updateUserRole(Integer userId, Roles role) {
-        return userRepo.updateUserRole(userId, role);
+    public void updateUserRole(Integer userId, Roles role) {
+        userRepo.updateUserRole(userId, role);
     }
 
-    public int updateUserBio(Integer userId, String bio) {
-        return userRepo.updateUserBio(userId, bio);
+    public void updateUserBio(Integer userId, String bio) {
+        userRepo.updateUserBio(userId, bio);
     }
 
-    public int updateUserPassword(Integer userId, String password) {
-        return userRepo.updateUserPassword(userId, password);
+    public void updateUserPassword(Integer userId, String password) {
+        userRepo.updateUserPassword(userId, password);
     }
 }

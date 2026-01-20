@@ -1,6 +1,7 @@
-package org.solopulse.Controller;
+package org.solopulse.controller;
 
 import jakarta.validation.Valid;
+import org.solopulse.dto.RoleUpdateDTO;
 import org.solopulse.dto.UserCreateDto;
 import org.solopulse.dto.UserResponseDTO;
 import org.solopulse.enums.Roles;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/users")
@@ -90,5 +92,29 @@ public class UserController {
     @GetMapping("/searchByName")
     public ResponseEntity<List<UserResponseDTO>> searchUsersByName(@RequestParam String name) {
         return new ResponseEntity<>(userService.searchUsersByName(name), HttpStatus.OK);
+    }
+
+    @PutMapping("/updateImage/{id}")
+    public ResponseEntity<String> updateImageUrl(@PathVariable Integer id, @RequestBody Map<String,String> request){
+        String imgUrl = request.get("imageUrl");
+        return new ResponseEntity<>(String.valueOf(userService.updateUserImage(id,imgUrl)),HttpStatus.OK);
+   }
+
+    @PutMapping("/updateRole/{id}")
+    public ResponseEntity<String> updateUserRole(@PathVariable Integer id, @RequestBody RoleUpdateDTO request){
+        Roles role = request.getRole();
+        return userService.updateUserRole(id,role);
+    }
+
+    @PutMapping("/updateBio/{id}")
+    public ResponseEntity<String> updateUserBio(@PathVariable Integer id, @RequestBody Map<String , String> userBio){
+        String changedBio =userBio.get("bio");
+        return userService.updateUserBio(id, changedBio);
+    }
+
+    @PutMapping("/updatePassword/{id}")
+    public ResponseEntity<String> updateUserPassword(@PathVariable Integer id, @RequestBody Map<String,String> pass){
+        String updatedPass = pass.get("password");
+        return userService.updateUserPassword(id,updatedPass);
     }
 }

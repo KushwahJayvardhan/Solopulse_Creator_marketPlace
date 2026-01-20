@@ -32,9 +32,10 @@ public class Creator_profile {
 
     private  String facebookHandle;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(columnDefinition = "TEXT", nullable = false)
     private String bio;
 
+    @Column(nullable = false)
     private String location;
 
     private Long followersCount;
@@ -44,8 +45,10 @@ public class Creator_profile {
     @ElementCollection(targetClass = ContentFormat.class)
     @CollectionTable(name= "creator_content_formats")
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private List<ContentFormat> contentFormats = new ArrayList<>();
 
+    @Column(nullable = false)
     private String pricing_tier;
 
     private String availabilityCalendarUrl;

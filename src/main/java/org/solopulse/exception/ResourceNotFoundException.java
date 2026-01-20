@@ -1,4 +1,4 @@
-package org.solopulse.Exception;
+package org.solopulse.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(String message) {

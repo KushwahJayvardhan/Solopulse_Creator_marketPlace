@@ -1,4 +1,4 @@
-package org.solopulse.Exception;
+package org.solopulse.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

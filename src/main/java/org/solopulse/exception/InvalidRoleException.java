@@ -1,4 +1,4 @@
-package org.solopulse.Exception;
+package org.solopulse.exception;
 
 public class InvalidRoleException extends RuntimeException {
     public InvalidRoleException(String message) {
